@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-	baseURL: 'http://localhost:8000/api/catalog',
+	baseURL: 'http://localhost:8000/api/users',
 	withCredentials: false,
 	headers: {
 		Accept: 'application/json',
@@ -10,6 +10,6 @@ const apiClient = axios.create({
 })
 
 export default {
-	getCatalog: () => apiClient.get('/'),
-	getProduct: (id) => apiClient.get(`/${id}`),
+	getUsers: () => apiClient.get('/'),
+	getUser: (id) => apiClient.get(`/${id}`),
 }

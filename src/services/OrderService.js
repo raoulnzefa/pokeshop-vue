@@ -1,0 +1,17 @@
+import axios from 'axios'
+
+const apiClient = axios.create({
+	baseURL: 'http://localhost:8000/api/orders',
+	withCredentials: false,
+	headers: {
+		Accept: 'application/json',
+		'Content-Type': 'application/json',
+	},
+})
+
+export default {
+	getOrders: () => apiClient.get('/'),
+	getOrder: (id) => apiClient.get(`/${id}`),
+	submitOrder: (data) => apiClient.post('/', data),
+	deleteOrder: (id) => apiClient.delete(`/${id}`),
+}

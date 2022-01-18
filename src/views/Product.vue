@@ -3,6 +3,7 @@ import { defineComponent } from 'vue'
 import ProductService from '@/services/ProductService'
 
 export default defineComponent({
+	name: 'Product',
 	props: {
 		id: {
 			type: String,
@@ -10,21 +11,32 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			product: null,
+			product: [],
 		}
 	},
+	computed: {
+		inCart() {
+			return !!this.$store.getters.inCart(+this.id)
+		},
+	},
 	created() {
-		// ProductService.getProduct(this.id)
-		//   .then(response => {
-		//     this.product = response.data
-		//   })
-		//   .catch(error => {
-		//     console.log(error)
-		//   })
-		this.product = ProductService.getProduct(+this.id)
+		ProductService.getProduct(this.id)
+			.then((response) => {
+				this.product = response.data
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	},
+	methods: {
+		addToCart(e) {
+			e.preventDefault()
+			this.$store.commit('addToCart', this.product)
+		},
 	},
 })
 </script>
+
 <template v-if="product">
 	<div class="breadcrumbs">
 		<router-link to="/">Home</router-link>
@@ -61,10 +73,14 @@ export default defineComponent({
 						max="10"
 						step="1"
 						value="1"
+						disabled
 					/>
 				</div>
 				<div>
-					<input type="submit" name="add" value="ADD TO CART" />
+					<button v-if="!inCart" @click="addToCart">
+						ADD TO CART
+					</button>
+					<button v-else disabled>ALREADY IN CART</button>
 				</div>
 			</form>
 		</div>

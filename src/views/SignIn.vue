@@ -1,3 +1,36 @@
+<script>
+import { defineComponent } from 'vue'
+import AuthService from '@/services/AuthService'
+
+export default defineComponent({
+	name: 'SignIn',
+	data() {
+		return {
+			name: '',
+			password: '',
+		}
+	},
+	created() {
+		if (this.$cookie.getCookie('user')) this.$router.replace('/')
+	},
+	methods: {
+		signIn() {
+			AuthService.signIn(this.name, this.password)
+				.then((res) => {
+					this.$cookie.setCookie('user', res.data.cookie, {
+						expire: '2d',
+						path: '/',
+						secure: true,
+						sameSite: true,
+					})
+					this.$router.go('/')
+				})
+				.catch((err) => console.err(err))
+		},
+	},
+})
+</script>
+
 <template>
 	<div class="breadcrumbs">
 		<router-link to="/">Home</router-link>
@@ -7,29 +40,22 @@
 	<div class="main">
 		<div class="login">
 			<h1>Welcome to PokeShop!</h1>
-			<form method="POST">
+			<form @submit.prevent="signIn">
 				<label>
 					Your name<br />
-					<input
-						id="name"
-						type="name"
-						name="name"
-						maxlength="10"
-						required
-					/>
+					<input v-model="name" type="text" maxlength="10" required />
 				</label>
 				<label>
 					Your password<br />
 					<input
-						id="password"
+						v-model="password"
 						type="password"
-						name="password"
 						minlength="8"
 						maxlength="64"
 						required
 					/>
 				</label>
-				<button type="submit">Sign in</button>
+				<input type="submit" value="Sign in" />
 			</form>
 			<span>
 				Forgot your password?
@@ -42,6 +68,7 @@
 		</div>
 	</div>
 </template>
+
 <style scoped>
 @import '../assets/styles/auth.css';
 </style>

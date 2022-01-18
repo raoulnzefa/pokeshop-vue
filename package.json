@@ -25,18 +25,19 @@
 	},
 	"homepage": "https://github.com/PAXANDDOS/pokeshop-vue#readme",
 	"dependencies": {
-		"axios": "^0.24.0",
-		"vue": "^3.2.26",
+		"axios": "^0.25.0",
+		"vue": "^3.2.27",
+		"vue-cookie-next": "^1.3.0",
 		"vue-router": "^4.0.12",
 		"vuex": "^4.0.2"
 	},
 	"devDependencies": {
 		"@vitejs/plugin-vue": "^2.0.1",
-		"eslint": "^8.6.0",
+		"eslint": "^8.7.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-vue": "^8.3.0",
 		"prettier": "^2.5.1",
-		"vite": "^2.7.10",
+		"vite": "^2.7.12",
 		"vite-plugin-eslint": "^1.3.0"
 	},
 	"browserslist": [

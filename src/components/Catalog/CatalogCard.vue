@@ -6,6 +6,7 @@ export default defineComponent({
 	props: {
 		product: {
 			type: Object,
+			isRequired: true,
 		},
 	},
 })
@@ -16,12 +17,12 @@ export default defineComponent({
 		<div class="single">
 			<img :src="`/img/${product.image}`" alt="Product image" />
 			<h3>{{ product.name }}</h3>
-			<span>{{ product.price }}</span>
+			<span>$ {{ product.price }}</span>
 			<label>BUY</label>
 		</div>
 	</router-link>
 </template>
 
 <style scoped>
-@import '../assets/styles/catalog.css';
+@import '../../assets/styles/catalog.css';
 </style>

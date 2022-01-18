@@ -1,3 +1,37 @@
+<script>
+import { defineComponent } from 'vue'
+import AuthService from '@/services/AuthService'
+
+export default defineComponent({
+	name: 'SignUp',
+	data() {
+		return {
+			name: '',
+			email: '',
+			password: '',
+			password_confirmation: '',
+		}
+	},
+	created() {
+		if (this.$cookie.getCookie('user')) this.$router.replace('/')
+	},
+	methods: {
+		signUp() {
+			AuthService.signUp(
+				this.name,
+				this.email,
+				this.password,
+				this.password_confirmation
+			)
+				.then(() => {
+					this.$router.go('/signin')
+				})
+				.catch((err) => console.err(err))
+		},
+	},
+})
+</script>
+
 <template>
 	<div class="breadcrumbs">
 		<router-link to="/">Home</router-link>
@@ -7,23 +41,16 @@
 	<div class="main">
 		<div class="login">
 			<h1>Welcome to PokeShop!</h1>
-			<form method="POST">
+			<form @submit.prevent="signUp">
 				<label>
 					Your name<br />
-					<input
-						id="name"
-						type="name"
-						name="name"
-						maxlength="10"
-						required
-					/>
+					<input v-model="name" type="text" maxlength="10" required />
 				</label>
 				<label>
 					Your email<br />
 					<input
-						id="email"
+						v-model="email"
 						type="email"
-						name="email"
 						maxlength="32"
 						required
 					/>
@@ -31,9 +58,8 @@
 				<label>
 					Your password<br />
 					<input
-						id="password"
+						v-model="password"
 						type="password"
-						name="password"
 						minlength="8"
 						maxlength="64"
 						required
@@ -42,15 +68,14 @@
 				<label>
 					Repeat your password<br />
 					<input
-						id="password"
+						v-model="password_confirmation"
 						type="password"
-						name="password_confirmation"
 						minlength="8"
 						maxlength="64"
 						required
 					/>
 				</label>
-				<button type="submit">Sign up</button>
+				<input type="submit" value="Sign up" />
 			</form>
 			<span>
 				Already a member?
@@ -59,6 +84,7 @@
 		</div>
 	</div>
 </template>
+
 <style scoped>
 @import '../assets/styles/auth.css';
 </style>

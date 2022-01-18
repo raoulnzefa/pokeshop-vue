@@ -1,5 +1,7 @@
-* text=auto eol=lf
-*.css linguist-vendored
-*.scss linguist-vendored
-*.js linguist-vendored
-CHANGELOG.md export-ignore
+* text=auto
+* eol=lf
+*.css linguist-language=CSS
+*.js linguist-language=JavaScript
+*.vue linguist-language=Vue
+*.html linguist-generated
+*.md linguist-generated
