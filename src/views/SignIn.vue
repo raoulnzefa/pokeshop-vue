@@ -17,15 +17,16 @@ export default defineComponent({
 		signIn() {
 			AuthService.signIn(this.name, this.password)
 				.then((res) => {
+					console.info(res.data.message)
 					this.$cookie.setCookie('user', res.data.cookie, {
 						expire: '2d',
 						path: '/',
 						secure: true,
 						sameSite: true,
 					})
-					this.$router.go('/')
+					this.$router.go('/account')
 				})
-				.catch((err) => console.err(err))
+				.catch(({ response }) => console.error(response.data.message))
 		},
 	},
 })

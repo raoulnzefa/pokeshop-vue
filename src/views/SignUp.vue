@@ -23,10 +23,11 @@ export default defineComponent({
 				this.password,
 				this.password_confirmation
 			)
-				.then(() => {
+				.then((res) => {
+					console.info(res.data.message)
 					this.$router.go('/signin')
 				})
-				.catch((err) => console.err(err))
+				.catch(({ response }) => console.error(response.data.message))
 		},
 	},
 })

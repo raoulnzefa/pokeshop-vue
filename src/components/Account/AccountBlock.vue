@@ -11,9 +11,10 @@ export default defineComponent({
 	},
 	methods: {
 		signOut() {
-			AuthService.signOut(this.user.token).then(() => {
+			AuthService.signOut(this.user.token).then((res) => {
+				console.info(res.data.message)
 				this.$cookie.removeCookie('user')
-				this.$router.go('/signin')
+				location.href('/signin')
 			})
 		},
 	},

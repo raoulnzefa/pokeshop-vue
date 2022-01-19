@@ -25,8 +25,10 @@ export default {
 		})
 	},
 	signOut: (token) => {
-		return apiClient.post('/signup', null, {
-			Authorization: `Bearer ${token}`,
+		return apiClient.post('/signout', null, {
+			headers: {
+				Authorization: token,
+			},
 		})
 	},
 }

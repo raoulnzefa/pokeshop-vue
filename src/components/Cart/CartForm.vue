@@ -14,6 +14,11 @@ export default defineComponent({
 			isRequired: true,
 		},
 	},
+	data() {
+		return {
+			user: this.$cookie.getCookie('user'),
+		}
+	},
 	computed: {
 		totalQuantity() {
 			return this.$store.getters.totalQuantity
@@ -24,7 +29,10 @@ export default defineComponent({
 	},
 	methods: {
 		submitOrder() {
-			OrderService.submitOrder(this.cart)
+			OrderService.submitOrder(this.cart, this.user.token).then((res) => {
+				console.info(res.data.message)
+				this.$store.commit('clearCart')
+			})
 		},
 	},
 })

@@ -131,6 +131,9 @@
 	margin: 0;
 	font-size: 18px;
 }
+.account-order-quantity {
+	font-size: 14px;
+}
 .account-order-price {
 	font-size: 12px;
 }

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const apiClient = axios.create({
 	baseURL: 'http://localhost:8000/api/orders',
-	withCredentials: false,
+	withCredentials: true,
 	headers: {
 		Accept: 'application/json',
 		'Content-Type': 'application/json',
@@ -10,8 +10,32 @@ const apiClient = axios.create({
 })
 
 export default {
-	getOrders: () => apiClient.get('/'),
-	getOrder: (id) => apiClient.get(`/${id}`),
-	submitOrder: (data) => apiClient.post('/', data),
-	deleteOrder: (id) => apiClient.delete(`/${id}`),
+	getOrders: (token) => {
+		return apiClient.get('/', {
+			headers: {
+				Authorization: token,
+			},
+		})
+	},
+	getOrder: (id, token) => {
+		return apiClient.get(`/${id}`, {
+			headers: {
+				Authorization: token,
+			},
+		})
+	},
+	submitOrder: (data, token) => {
+		return apiClient.post('/', data, {
+			headers: {
+				Authorization: token,
+			},
+		})
+	},
+	deleteOrder: (id, token) => {
+		return apiClient.delete(`/${id}`, {
+			headers: {
+				Authorization: token,
+			},
+		})
+	},
 }

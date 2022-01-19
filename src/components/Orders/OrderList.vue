@@ -12,9 +12,9 @@ export default defineComponent({
 		}
 	},
 	created() {
-		OrderService.getOrders()
-			.then((response) => {
-				this.orders = response.data
+		OrderService.getOrders(this.$cookie.getCookie('user').token)
+			.then((res) => {
+				this.orders = res.data
 			})
 			.catch((error) => {
 				console.log(error)

@@ -38,6 +38,7 @@ export default createStore({
 				quantity: product.quantity - 1,
 			})
 		},
+		clearCart: (state) => (state.cart = []),
 	},
 	actions: {},
 	modules: {},
