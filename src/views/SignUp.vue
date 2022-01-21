@@ -1,6 +1,6 @@
 <script>
-import { defineComponent } from 'vue'
 import AuthService from '@/services/AuthService'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'SignUp',
@@ -25,7 +25,7 @@ export default defineComponent({
 			)
 				.then((res) => {
 					console.info(res.data.message)
-					this.$router.go('/signin')
+					this.$router.push('/signin')
 				})
 				.catch(({ response }) => console.error(response.data.message))
 		},

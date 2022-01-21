@@ -1,6 +1,6 @@
 <script>
-import { defineComponent } from 'vue'
 import OrderService from '@/services/OrderService'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'CartForm',
@@ -29,10 +29,14 @@ export default defineComponent({
 	},
 	methods: {
 		submitOrder() {
-			OrderService.submitOrder(this.cart, this.user.token).then((res) => {
-				console.info(res.data.message)
-				this.$store.commit('clearCart')
-			})
+			if (!this.$cookie.getCookie('user')) this.$router.push('/signin')
+			else
+				OrderService.submitOrder(this.cart, this.user.token).then(
+					(res) => {
+						console.info(res.data.message)
+						this.$store.commit('clearCart')
+					}
+				)
 		},
 	},
 })

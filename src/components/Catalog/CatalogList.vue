@@ -1,7 +1,7 @@
 <script>
+import ProductService from '@/services/ProductService'
 import { defineComponent } from 'vue'
 import CatalogCard from './CatalogCard.vue'
-import ProductService from '@/services/ProductService'
 
 export default defineComponent({
 	name: 'CatalogList',
@@ -18,8 +18,8 @@ export default defineComponent({
 			.then((response) => {
 				this.catalog = response.data
 			})
-			.catch((error) => {
-				console.log(error)
+			.catch((err) => {
+				console.error(err)
 			})
 	},
 })
@@ -30,7 +30,7 @@ export default defineComponent({
 		<div class="page_head">
 			<div id="number">
 				<h2>CATALOG</h2>
-				<span><b>PRODUCTS:</b>1 - 10</span>
+				<span><b>PRODUCTS:</b> ( 1 - {{ catalog?.length }} )</span>
 			</div>
 			<div id="pages">
 				<span>SORT BY:</span>

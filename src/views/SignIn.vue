@@ -1,6 +1,6 @@
 <script>
-import { defineComponent } from 'vue'
 import AuthService from '@/services/AuthService'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'SignIn',
@@ -24,7 +24,7 @@ export default defineComponent({
 						secure: true,
 						sameSite: true,
 					})
-					this.$router.go('/account')
+					this.$router.push('/account')
 				})
 				.catch(({ response }) => console.error(response.data.message))
 		},
